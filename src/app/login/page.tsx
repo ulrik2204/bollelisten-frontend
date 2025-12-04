@@ -20,12 +20,8 @@ export default function Login() {
           <LoginForm onSuccess={() => router.push("/")} />
 
           <Text ta="center" mt="md">
-            Don&apos;t have a group?
-            <Anchor
-              href="#"
-              fw={500}
-              onClick={(event) => event.preventDefault()}
-            >
+            Don&apos;t have a group?{" "}
+            <Anchor href="/create-group" fw={500}>
               Create group
             </Anchor>
           </Text>
