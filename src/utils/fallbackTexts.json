@@ -5,5 +5,6 @@
   "login.error.invalidGroup": "The group slug you entered is invalid. Please check and try again.",
   "login.error.generic": "An unexpected error occurred. Please try again later.",
   "login.error.empty": "Please enter a group slug.",
-  "login.success": "You have successfully logged in!"
+  "login.success": "You have successfully logged in!",
+  "entries.addEntryButton": "Add Entry"
 }

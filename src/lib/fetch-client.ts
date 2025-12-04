@@ -37,6 +37,7 @@ export async function appFetch<TResponse>(
   const res = await fetch(`${backendUrl}${url}`, {
     ...restOptions,
     body: body ? JSON.stringify(body) : undefined,
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       "X-SessionId": getOrCreateSessionId(),
