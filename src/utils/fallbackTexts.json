@@ -1,0 +1,9 @@
+{
+  "login.title": "Login to Your Group",
+  "login.description": "Enter your group slug to get access to Bollelisten for that group",
+  "login.input.group.label": "Group Slug",
+  "login.error.invalidGroup": "The group slug you entered is invalid. Please check and try again.",
+  "login.error.generic": "An unexpected error occurred. Please try again later.",
+  "login.error.empty": "Please enter a group slug.",
+  "login.success": "You have successfully logged in!"
+}

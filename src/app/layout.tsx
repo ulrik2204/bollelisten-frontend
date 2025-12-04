@@ -1,12 +1,13 @@
 // Import styles of packages that you've installed.
 // All packages except `@mantine/hooks` require styles imports
-import '@mantine/core/styles.css';
+import "@mantine/core/styles.css";
 
-import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
+import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
+import { Providers } from "../config/providers";
 
 export const metadata = {
-  title: 'Bollelisten',
-  description: 'Appen for å holde styr på hvem som skylder landskapet boller!',
+  title: "Bollelisten",
+  description: "Appen for å holde styr på hvem som skylder landskapet boller!",
 };
 
 export default function RootLayout({
@@ -20,7 +21,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
