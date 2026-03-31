@@ -1,10 +1,14 @@
 import { appFetch, AppFetchError, FetchResponse } from "@/lib/fetch-client";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 
+export type EntryPerson = {
+  id: string;
+  name: string;
+};
+
 export type Entry = {
   id: string;
-  personId: string;
-  personName: string;
+  person: EntryPerson;
   incidentTime: string;
   fulfilledTime: string | null;
 };

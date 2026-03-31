@@ -9,8 +9,10 @@ export type CreateEntryRequest = {
 
 export type CreateEntryResponse = {
   id: string;
-  personId: string;
-  personName: string;
+  person: {
+    id: string;
+    name: string;
+  };
   incidentTime: string;
   fulfilledTime: string | null;
 };

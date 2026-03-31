@@ -2,6 +2,7 @@
 // All packages except `@mantine/hooks` require styles imports
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
+import "@mantine/charts/styles.css";
 
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import { Providers } from "../config/providers";

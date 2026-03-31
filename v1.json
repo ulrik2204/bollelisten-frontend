@@ -1,0 +1,524 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API | v1",
+    "description": "\r\n⚠️ **Authentication Required**: Most endpoints require authentication.\r\n\r\n**To authenticate:**\r\n1. First call `POST /login` with your group slug to get the authentication cookie\r\n2. Include the `X-SessionId` header in all requests\r\n3. The cookie will be automatically included in requests from the browser\r\n",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5048/"
+    }
+  ],
+  "paths": {
+    "/Entries/{entryId}": {
+      "get": {
+        "tags": [
+          "Entries"
+        ],
+        "parameters": [
+          {
+            "name": "entryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "X-SessionId",
+            "in": "header",
+            "description": "Unique session identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "64091813-cc2e-41fd-8e3b-8aa036829bc3"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Entries"
+        ],
+        "parameters": [
+          {
+            "name": "entryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "X-SessionId",
+            "in": "header",
+            "description": "Unique session identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "64091813-cc2e-41fd-8e3b-8aa036829bc3"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEntryRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEntryRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEntryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Entries"
+        ],
+        "parameters": [
+          {
+            "name": "entryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "X-SessionId",
+            "in": "header",
+            "description": "Unique session identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "64091813-cc2e-41fd-8e3b-8aa036829bc3"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Entries": {
+      "get": {
+        "tags": [
+          "Entries"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-SessionId",
+            "in": "header",
+            "description": "Unique session identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "64091813-cc2e-41fd-8e3b-8aa036829bc3"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Entries"
+        ],
+        "parameters": [
+          {
+            "name": "X-SessionId",
+            "in": "header",
+            "description": "Unique session identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "64091813-cc2e-41fd-8e3b-8aa036829bc3"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEntryRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEntryRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEntryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Groups/current": {
+      "get": {
+        "tags": [
+          "Groups"
+        ],
+        "parameters": [
+          {
+            "name": "X-SessionId",
+            "in": "header",
+            "description": "Unique session identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "64091813-cc2e-41fd-8e3b-8aa036829bc3"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Groups": {
+      "post": {
+        "tags": [
+          "Groups"
+        ],
+        "parameters": [
+          {
+            "name": "X-SessionId",
+            "in": "header",
+            "description": "Unique session identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "64091813-cc2e-41fd-8e3b-8aa036829bc3"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGroupRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGroupRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGroupRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "parameters": [
+          {
+            "name": "X-SessionId",
+            "in": "header",
+            "description": "Unique session identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "64091813-cc2e-41fd-8e3b-8aa036829bc3"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupLoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupLoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupLoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/People": {
+      "get": {
+        "tags": [
+          "People"
+        ],
+        "parameters": [
+          {
+            "name": "X-SessionId",
+            "in": "header",
+            "description": "Unique session identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "64091813-cc2e-41fd-8e3b-8aa036829bc3"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "People"
+        ],
+        "parameters": [
+          {
+            "name": "X-SessionId",
+            "in": "header",
+            "description": "Unique session identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "64091813-cc2e-41fd-8e3b-8aa036829bc3"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePersonRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePersonRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePersonRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/People/{personId}": {
+      "get": {
+        "tags": [
+          "People"
+        ],
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "X-SessionId",
+            "in": "header",
+            "description": "Unique session identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "64091813-cc2e-41fd-8e3b-8aa036829bc3"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateEntryRequest": {
+        "required": [
+          "personId",
+          "incidentTime",
+          "fulfilledTime"
+        ],
+        "type": "object",
+        "properties": {
+          "personId": {
+            "type": "string"
+          },
+          "incidentTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fulfilledTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "CreateGroupRequest": {
+        "required": [
+          "slug",
+          "name",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreatePersonRequest": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "GroupLoginRequest": {
+        "required": [
+          "groupSlug"
+        ],
+        "type": "object",
+        "properties": {
+          "groupSlug": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateEntryRequest": {
+        "required": [
+          "incidentTime",
+          "fulfilledTime"
+        ],
+        "type": "object",
+        "properties": {
+          "incidentTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fulfilledTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Entries"
+    },
+    {
+      "name": "Groups"
+    },
+    {
+      "name": "Login"
+    },
+    {
+      "name": "People"
+    }
+  ]
+}

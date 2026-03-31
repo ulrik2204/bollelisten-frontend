@@ -94,7 +94,7 @@ export function EntriesList({ groupSlug }: EntriesListProps) {
             <Table.Tbody>
               {entries.map((entry) => (
                 <Table.Tr key={entry.id}>
-                  <Table.Td>{entry.personName}</Table.Td>
+                  <Table.Td>{entry.person.name}</Table.Td>
                   <Table.Td>
                     {new Date(entry.incidentTime).toLocaleString()}
                   </Table.Td>

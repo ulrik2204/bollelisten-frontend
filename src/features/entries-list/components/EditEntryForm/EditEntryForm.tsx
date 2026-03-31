@@ -80,7 +80,7 @@ export function EditEntryForm({ groupSlug, entry }: EditEntryFormProps) {
           <Title order={2}>Edit Entry</Title>
 
           <Text size="lg" fw={500}>
-            Person: {entry.personName}
+            Person: {entry.person.name}
           </Text>
 
           <form.Field
