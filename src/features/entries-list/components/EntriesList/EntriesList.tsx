@@ -20,18 +20,23 @@ import { useState } from "react";
 import { useGetEntries } from "../../api/get-entries";
 import { usePutUpdateEntry } from "../../api/put-update-entry";
 
-export function EntriesList() {
+type EntriesListProps = {
+  groupSlug: string;
+};
+
+export function EntriesList({ groupSlug }: EntriesListProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [error, setError] = useState<string | null>(null);
-  const { data, isLoading, error: fetchError } = useGetEntries();
+  const { data, isLoading, error: fetchError } = useGetEntries(groupSlug);
 
   const { mutate: updateEntry, isPending: isMarkingAsDone } = usePutUpdateEntry(
+    groupSlug,
     {
       onError: (error) => setError(error.message),
       onSuccess: () => {
         setError(null);
-        queryClient.invalidateQueries({ queryKey: ["entries"] });
+        queryClient.invalidateQueries({ queryKey: ["entries", groupSlug] });
       },
     }
   );
@@ -65,7 +70,7 @@ export function EntriesList() {
   };
 
   const handleEdit = (entryId: string) => {
-    router.push(`/edit-entry/${entryId}`);
+    router.push(`/groups/${groupSlug}/edit-entry/${entryId}`);
   };
 
   return (

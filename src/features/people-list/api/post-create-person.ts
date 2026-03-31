@@ -11,8 +11,8 @@ export type CreatePersonResponse = {
   groupId: string;
 };
 
-export function postCreatePerson(data: CreatePersonRequest) {
-  const url = `/people`;
+export function postCreatePerson(groupSlug: string, data: CreatePersonRequest) {
+  const url = `/groups/${groupSlug}/people`;
   return appFetch<CreatePersonResponse>(url, {
     method: "POST",
     body: data,
@@ -20,6 +20,7 @@ export function postCreatePerson(data: CreatePersonRequest) {
 }
 
 export function usePostCreatePerson(
+  groupSlug: string,
   options?: UseMutationOptions<
     FetchResponse<CreatePersonResponse>,
     AppFetchError,
@@ -31,7 +32,8 @@ export function usePostCreatePerson(
     AppFetchError,
     CreatePersonRequest
   >({
-    mutationFn: postCreatePerson,
+    mutationFn: (data: CreatePersonRequest) =>
+      postCreatePerson(groupSlug, data),
     ...options,
   });
 }

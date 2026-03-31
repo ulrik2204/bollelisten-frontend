@@ -17,14 +17,6 @@ export class AppFetchError extends Error {
   }
 }
 
-function getOrCreateSessionId() {
-  if (!sessionStorage.getItem("sessionId")) {
-    const sessionId = crypto.randomUUID();
-    sessionStorage.setItem("sessionId", sessionId);
-  }
-  return sessionStorage.getItem("sessionId")!;
-}
-
 export async function appFetch<TResponse>(
   url: string,
   options?: Omit<RequestInit, "body"> & {
@@ -40,7 +32,6 @@ export async function appFetch<TResponse>(
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      "X-SessionId": getOrCreateSessionId(),
       ...(options?.headers || {}),
     },
   });

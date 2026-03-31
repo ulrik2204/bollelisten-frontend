@@ -20,7 +20,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { usePostCreateEntry } from "../../api/post-create-entry";
 
-export function AddEntryForm() {
+type AddEntryFormProps = {
+  groupSlug: string;
+};
+
+export function AddEntryForm({ groupSlug }: AddEntryFormProps) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [modalOpened, { open: openModal, close: closeModal }] =
@@ -30,13 +34,13 @@ export function AddEntryForm() {
     data: peopleData,
     isLoading: isPeopleLoading,
     refetch: refetchPeople,
-  } = useGetPeople();
+  } = useGetPeople(groupSlug);
 
-  const { mutate: createEntry, isPending } = usePostCreateEntry({
+  const { mutate: createEntry, isPending } = usePostCreateEntry(groupSlug, {
     onError: (error) => setError(error.message),
     onSuccess: () => {
       setError(null);
-      router.push("/");
+      router.push(`/groups/${groupSlug}`);
     },
   });
 
@@ -201,6 +205,7 @@ export function AddEntryForm() {
       </Card>
 
       <CreatePersonModal
+        groupSlug={groupSlug}
         opened={modalOpened}
         onClose={closeModal}
         onSuccess={handlePersonCreated}

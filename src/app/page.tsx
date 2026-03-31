@@ -1,35 +1,72 @@
 "use client";
 
-import { EntriesList } from "@/features/entries-list/components/EntriesList/EntriesList";
-import { GroupInfo } from "@/features/group-info/components/GroupInfo/GroupInfo";
-import { PeopleList } from "@/features/people-list/components/PeopleList/PeopleList";
-import { getText } from "@/utils/text-service";
-import { Anchor, Container, Grid, Stack, Title } from "@mantine/core";
+import {
+  Anchor,
+  Button,
+  Container,
+  Flex,
+  Paper,
+  Text,
+  TextInput,
+  Title,
+} from "@mantine/core";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Home() {
+  const router = useRouter();
+  const [groupSlug, setGroupSlug] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleGoToGroup = () => {
+    const slug = groupSlug.trim();
+    if (!slug) {
+      setError("Please enter a group slug.");
+      return;
+    }
+    setError(null);
+    router.push(`/groups/${slug}`);
+  };
+
   return (
-    <Container size="xl" py="xl">
-      <Stack gap="xl">
-        <Title order={1}>Dashboard</Title>
+    <main>
+      <Container size={420} my={40}>
+        <Flex direction="column" gap="md">
+          <Title ta="center">Go to Your Group</Title>
+          <Text>
+            Enter your group slug to access your group&apos;s Bollelisten
+          </Text>
 
-        <Grid gutter="md">
-          <Grid.Col span={{ base: 12, md: 8 }}>
-            <Stack gap="md">
-              <Anchor href="/add-entry" fw={500}>
-                {getText("entries.addEntryButton")}
-              </Anchor>
-              <EntriesList />
-            </Stack>
-          </Grid.Col>
+          <Paper
+            withBorder
+            shadow="sm"
+            radius="md"
+            p="lg"
+            style={{ width: "100%" }}
+          >
+            <Flex direction="column" gap="xl">
+              <TextInput
+                label="Group Slug"
+                required
+                radius="md"
+                value={groupSlug}
+                onChange={(e) => setGroupSlug(e.target.value)}
+                error={error}
+              />
+              <Button fullWidth radius="md" onClick={handleGoToGroup}>
+                Go to group
+              </Button>
+            </Flex>
+          </Paper>
 
-          <Grid.Col span={{ base: 12, md: 4 }}>
-            <Stack gap="md">
-              <GroupInfo />
-              <PeopleList />
-            </Stack>
-          </Grid.Col>
-        </Grid>
-      </Stack>
-    </Container>
+          <Text ta="center" mt="md">
+            Don&apos;t have a group?{" "}
+            <Anchor href="/create-group" fw={500}>
+              Create group
+            </Anchor>
+          </Text>
+        </Flex>
+      </Container>
+    </main>
   );
 }

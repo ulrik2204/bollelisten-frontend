@@ -14,8 +14,12 @@ export type UpdateEntryResponse = {
   fulfilledTime: string | null;
 };
 
-export function putUpdateEntry(entryId: string, data: UpdateEntryRequest) {
-  const url = `/entries/${entryId}`;
+export function putUpdateEntry(
+  groupSlug: string,
+  entryId: string,
+  data: UpdateEntryRequest
+) {
+  const url = `/groups/${groupSlug}/entries/${entryId}`;
   return appFetch<UpdateEntryResponse>(url, {
     method: "PUT",
     body: data,
@@ -23,6 +27,7 @@ export function putUpdateEntry(entryId: string, data: UpdateEntryRequest) {
 }
 
 export function usePutUpdateEntry(
+  groupSlug: string,
   options?: UseMutationOptions<
     FetchResponse<UpdateEntryResponse>,
     AppFetchError,
@@ -34,7 +39,7 @@ export function usePutUpdateEntry(
     AppFetchError,
     { entryId: string; data: UpdateEntryRequest }
   >({
-    mutationFn: ({ entryId, data }) => putUpdateEntry(entryId, data),
+    mutationFn: ({ entryId, data }) => putUpdateEntry(groupSlug, entryId, data),
     ...options,
   });
 }

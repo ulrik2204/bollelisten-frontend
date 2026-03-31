@@ -1,10 +1,14 @@
 "use client";
 
 import { Alert, Card, Group, Loader, Stack, Text, Title } from "@mantine/core";
-import { useGetCurrentGroup } from "../../api/get-current-group";
+import { useGetGroup } from "../../api/get-current-group";
 
-export function GroupInfo() {
-  const { data, isLoading, error } = useGetCurrentGroup();
+type GroupInfoProps = {
+  groupSlug: string;
+};
+
+export function GroupInfo({ groupSlug }: GroupInfoProps) {
+  const { data, isLoading, error } = useGetGroup(groupSlug);
 
   if (isLoading) {
     return (
@@ -30,7 +34,7 @@ export function GroupInfo() {
   if (!group) {
     return (
       <Alert color="yellow" title="No group found">
-        You are not currently logged into a group
+        Group not found
       </Alert>
     );
   }

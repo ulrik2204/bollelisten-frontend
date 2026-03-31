@@ -12,8 +12,12 @@ import {
 } from "@mantine/core";
 import { useGetPeople } from "../../api/get-people";
 
-export function PeopleList() {
-  const { data, isLoading, error } = useGetPeople();
+type PeopleListProps = {
+  groupSlug: string;
+};
+
+export function PeopleList({ groupSlug }: PeopleListProps) {
+  const { data, isLoading, error } = useGetPeople(groupSlug);
 
   if (isLoading) {
     return (

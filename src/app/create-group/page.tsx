@@ -19,13 +19,13 @@ export default function CreateGroup() {
           </Text>
 
           <CreateGroupForm
-            onSuccess={(groupSlug) => router.push(`/?group=${groupSlug}`)}
+            onSuccess={(groupSlug) => router.push(`/groups/${groupSlug}`)}
           />
 
           <Text ta="center" mt="md">
             Already have a group?{" "}
-            <Anchor href="/login" fw={500}>
-              Sign in
+            <Anchor href="/" fw={500}>
+              Go to group
             </Anchor>
           </Text>
         </div>

@@ -15,8 +15,8 @@ export type CreateEntryResponse = {
   fulfilledTime: string | null;
 };
 
-export function postCreateEntry(data: CreateEntryRequest) {
-  const url = `/entries`;
+export function postCreateEntry(groupSlug: string, data: CreateEntryRequest) {
+  const url = `/groups/${groupSlug}/entries`;
   return appFetch<CreateEntryResponse>(url, {
     method: "POST",
     body: data,
@@ -24,6 +24,7 @@ export function postCreateEntry(data: CreateEntryRequest) {
 }
 
 export function usePostCreateEntry(
+  groupSlug: string,
   options?: UseMutationOptions<
     FetchResponse<CreateEntryResponse>,
     AppFetchError,
@@ -35,7 +36,7 @@ export function usePostCreateEntry(
     AppFetchError,
     CreateEntryRequest
   >({
-    mutationFn: postCreateEntry,
+    mutationFn: (data: CreateEntryRequest) => postCreateEntry(groupSlug, data),
     ...options,
   });
 }

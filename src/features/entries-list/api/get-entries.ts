@@ -16,24 +16,26 @@ export type GetEntriesParams = {
 
 export type GetEntriesResponse = Entry[];
 
-export function getEntries(params?: GetEntriesParams) {
+export function getEntries(groupSlug: string, params?: GetEntriesParams) {
   const queryParams = new URLSearchParams();
   if (params?.limit) queryParams.append("limit", params.limit.toString());
   if (params?.offset) queryParams.append("offset", params.offset.toString());
 
-  const url = `/entries${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
+  const url = `/groups/${groupSlug}/entries${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
   return appFetch<GetEntriesResponse>(url, {
     method: "GET",
   });
 }
 
 export function useGetEntries(
+  groupSlug: string,
   params?: GetEntriesParams,
   options?: UseQueryOptions<FetchResponse<GetEntriesResponse>, AppFetchError>
 ) {
   return useQuery<FetchResponse<GetEntriesResponse>, AppFetchError>({
-    queryKey: ["entries", params],
-    queryFn: () => getEntries(params),
+    queryKey: ["entries", groupSlug, params],
+    queryFn: () => getEntries(groupSlug, params),
+    enabled: !!groupSlug,
     ...options,
   });
 }

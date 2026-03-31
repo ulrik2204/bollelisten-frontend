@@ -6,19 +6,21 @@ import { useState } from "react";
 import { usePostCreatePerson } from "../../api/post-create-person";
 
 export type CreatePersonModalProps = {
+  groupSlug: string;
   opened: boolean;
   onClose: () => void;
   onSuccess?: (person: { id: string; name: string; groupId: string }) => void;
 };
 
 export function CreatePersonModal({
+  groupSlug,
   opened,
   onClose,
   onSuccess,
 }: CreatePersonModalProps) {
   const [error, setError] = useState<string | null>(null);
 
-  const { mutate: createPerson, isPending } = usePostCreatePerson({
+  const { mutate: createPerson, isPending } = usePostCreatePerson(groupSlug, {
     onError: (error) => setError(error.message),
     onSuccess: (response) => {
       setError(null);

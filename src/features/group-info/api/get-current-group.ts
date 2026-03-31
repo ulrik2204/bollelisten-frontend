@@ -10,22 +10,24 @@ export type Group = {
 
 export type GetCurrentGroupResponse = Group;
 
-export function getCurrentGroup() {
-  const url = `/groups/current`;
+export function getGroup(groupSlug: string) {
+  const url = `/groups/${groupSlug}`;
   return appFetch<GetCurrentGroupResponse>(url, {
     method: "GET",
   });
 }
 
-export function useGetCurrentGroup(
+export function useGetGroup(
+  groupSlug: string,
   options?: UseQueryOptions<
     FetchResponse<GetCurrentGroupResponse>,
     AppFetchError
   >
 ) {
   return useQuery<FetchResponse<GetCurrentGroupResponse>, AppFetchError>({
-    queryKey: ["groups", "current"],
-    queryFn: getCurrentGroup,
+    queryKey: ["groups", groupSlug],
+    queryFn: () => getGroup(groupSlug),
+    enabled: !!groupSlug,
     ...options,
   });
 }

@@ -10,7 +10,7 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { DatePicker } from "@mantine/dates";
+import { DateTimePicker } from "@mantine/dates";
 import { useForm } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,18 +18,19 @@ import { Entry } from "../../api/get-entries";
 import { usePutUpdateEntry } from "../../api/put-update-entry";
 
 type EditEntryFormProps = {
+  groupSlug: string;
   entry: Entry;
 };
 
-export function EditEntryForm({ entry }: EditEntryFormProps) {
+export function EditEntryForm({ groupSlug, entry }: EditEntryFormProps) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
-  const { mutate: updateEntry, isPending } = usePutUpdateEntry({
+  const { mutate: updateEntry, isPending } = usePutUpdateEntry(groupSlug, {
     onError: (error) => setError(error.message),
     onSuccess: () => {
       setError(null);
-      router.push("/");
+      router.push(`/groups/${groupSlug}`);
     },
   });
 
@@ -94,14 +95,12 @@ export function EditEntryForm({ entry }: EditEntryFormProps) {
             }}
           >
             {(field) => (
-              <DatePicker
+              <DateTimePicker
                 label="Incident Date"
                 placeholder="Select date"
                 required
                 value={field.state.value ? new Date(field.state.value) : null}
-                onChange={(date) =>
-                  field.handleChange(date?.toISOString() || "")
-                }
+                onChange={(date) => field.handleChange(date || "")}
                 onBlur={field.handleBlur}
                 error={field.state.meta.errors?.[0]}
               />
@@ -123,15 +122,13 @@ export function EditEntryForm({ entry }: EditEntryFormProps) {
               hasFulfilledTime ? (
                 <form.Field name="fulfilledTime">
                   {(field) => (
-                    <DatePicker
+                    <DateTimePicker
                       label="Fulfilled Date"
                       placeholder="Select date"
                       value={
                         field.state.value ? new Date(field.state.value) : null
                       }
-                      onChange={(date) =>
-                        field.handleChange(date?.toISOString() || null)
-                      }
+                      onChange={(date) => field.handleChange(date || null)}
                       onBlur={field.handleBlur}
                     />
                   )}
@@ -146,7 +143,11 @@ export function EditEntryForm({ entry }: EditEntryFormProps) {
             <Button type="submit" loading={isPending} fullWidth>
               Update Entry
             </Button>
-            <Button variant="subtle" fullWidth onClick={() => router.push("/")}>
+            <Button
+              variant="subtle"
+              fullWidth
+              onClick={() => router.push(`/groups/${groupSlug}`)}
+            >
               Cancel
             </Button>
           </Stack>

@@ -9,19 +9,21 @@ export type Person = {
 
 export type GetPeopleResponse = Person[];
 
-export function getPeople() {
-  const url = `/people`;
+export function getPeople(groupSlug: string) {
+  const url = `/groups/${groupSlug}/people`;
   return appFetch<GetPeopleResponse>(url, {
     method: "GET",
   });
 }
 
 export function useGetPeople(
+  groupSlug: string,
   options?: UseQueryOptions<FetchResponse<GetPeopleResponse>, AppFetchError>
 ) {
   return useQuery<FetchResponse<GetPeopleResponse>, AppFetchError>({
-    queryKey: ["people"],
-    queryFn: getPeople,
+    queryKey: ["people", groupSlug],
+    queryFn: () => getPeople(groupSlug),
+    enabled: !!groupSlug,
     ...options,
   });
 }
