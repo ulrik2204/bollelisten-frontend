@@ -1,5 +1,6 @@
-import { appFetch, AppFetchError, FetchResponse } from "@/lib/fetch-client";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
+
+import { appFetch, AppFetchError, FetchResponse } from "@/lib/fetch-client";
 
 export type UpdateEntryRequest = {
   incidentTime?: string | null;

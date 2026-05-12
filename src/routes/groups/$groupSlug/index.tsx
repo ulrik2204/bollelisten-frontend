@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Anchor, Container, Grid, Stack, Title } from "@mantine/core";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { EntriesList } from "@/features/entries-list/components/EntriesList/EntriesList";
 import { GroupInfo } from "@/features/group-info/components/GroupInfo/GroupInfo";

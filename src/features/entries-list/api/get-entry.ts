@@ -1,5 +1,7 @@
-import { appFetch, AppFetchError, FetchResponse } from "@/lib/fetch-client";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+
+import { appFetch, AppFetchError, FetchResponse } from "@/lib/fetch-client";
+
 import { Entry } from "./get-entries";
 
 export function getEntry(groupSlug: string, entryId: string) {

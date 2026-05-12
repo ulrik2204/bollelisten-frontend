@@ -1,5 +1,6 @@
-import { appFetch, AppFetchError, FetchResponse } from "@/lib/fetch-client";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+
+import { appFetch, AppFetchError, FetchResponse } from "@/lib/fetch-client";
 
 export type Group = {
   id: string;

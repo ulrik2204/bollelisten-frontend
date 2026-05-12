@@ -1,8 +1,9 @@
 "use client";
 
-import { Button, Flex, Paper, Text, TextInput, Textarea } from "@mantine/core";
+import { Button, Flex, Paper, Text, Textarea,TextInput } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
 import { useState } from "react";
+
 import { usePostCreateGroup } from "../../api/post-create-group";
 
 export type CreateGroupFormProps = {
@@ -35,7 +36,7 @@ export function CreateGroupForm({ onSuccess }: CreateGroupFormProps) {
       setError(getErrorMessage(response.info.status));
     },
     onSuccess: (response) => {
-      if (!onSuccess) return;
+      if (!onSuccess) {return;}
       setTimeout(() => onSuccess(response.body.slug), 2000);
     },
   });

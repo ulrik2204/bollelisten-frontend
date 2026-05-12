@@ -10,6 +10,7 @@ import {
   Text,
   Title,
 } from "@mantine/core";
+
 import { useGetPeople } from "../../api/get-people";
 
 type PeopleListProps = {

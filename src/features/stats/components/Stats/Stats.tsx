@@ -1,11 +1,12 @@
 "use client";
 
-import { useGetEntries } from "@/features/entries-list/api/get-entries";
-import { useGetPeople } from "@/features/people-list/api/get-people";
 import { BarChart } from "@mantine/charts";
 import { Alert, Card, Loader, Stack, Text, Title } from "@mantine/core";
 import { DatePickerInput, type DateValue } from "@mantine/dates";
 import { useMemo, useState } from "react";
+
+import { useGetEntries } from "@/features/entries-list/api/get-entries";
+import { useGetPeople } from "@/features/people-list/api/get-people";
 
 type StatsProps = {
   groupSlug: string;

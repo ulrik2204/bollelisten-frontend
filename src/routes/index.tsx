@@ -1,4 +1,3 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   Anchor,
   Button,
@@ -9,6 +8,7 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
 export const Route = createFileRoute("/")({

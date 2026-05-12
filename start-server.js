@@ -27,9 +27,9 @@ const MIME = {
 };
 
 async function tryServeStatic(pathname, res) {
-  if (pathname === "/") return false;
+  if (pathname === "/") {return false;}
   const filePath = join(clientDir, pathname);
-  if (!filePath.startsWith(clientDir)) return false;
+  if (!filePath.startsWith(clientDir)) {return false;}
 
   try {
     const content = await readFile(filePath);
@@ -58,7 +58,7 @@ function toWebRequest(req) {
   const headers = new Headers();
   for (const [key, value] of Object.entries(req.headers)) {
     if (value != null)
-      headers.set(key, Array.isArray(value) ? value.join(", ") : value);
+      {headers.set(key, Array.isArray(value) ? value.join(", ") : value);}
   }
 
   const init = { method: req.method, headers };
@@ -79,7 +79,7 @@ async function sendWebResponse(webRes, res) {
     try {
       while (true) {
         const { done, value } = await reader.read();
-        if (done) break;
+        if (done) {break;}
         res.write(value);
       }
     } finally {
@@ -93,7 +93,7 @@ createServer(async (req, res) => {
   const url = new URL(req.url, "http://localhost");
 
   if (req.method === "GET" || req.method === "HEAD") {
-    if (await tryServeStatic(url.pathname, res)) return;
+    if (await tryServeStatic(url.pathname, res)) {return;}
   }
 
   try {
@@ -101,7 +101,7 @@ createServer(async (req, res) => {
     await sendWebResponse(response, res);
   } catch (err) {
     console.error("Server error:", err);
-    if (!res.headersSent) res.writeHead(500, { "Content-Type": "text/plain" });
+    if (!res.headersSent) {res.writeHead(500, { "Content-Type": "text/plain" });}
     res.end("Internal Server Error");
   }
 }).listen(port, () => {

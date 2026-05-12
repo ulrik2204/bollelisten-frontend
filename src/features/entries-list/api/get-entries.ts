@@ -1,5 +1,6 @@
-import { appFetch, AppFetchError, FetchResponse } from "@/lib/fetch-client";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+
+import { appFetch, AppFetchError, FetchResponse } from "@/lib/fetch-client";
 
 export type EntryPerson = {
   id: string;
@@ -22,8 +23,8 @@ export type GetEntriesResponse = Entry[];
 
 export function getEntries(groupSlug: string, params?: GetEntriesParams) {
   const queryParams = new URLSearchParams();
-  if (params?.limit) queryParams.append("limit", params.limit.toString());
-  if (params?.offset) queryParams.append("offset", params.offset.toString());
+  if (params?.limit) {queryParams.append("limit", params.limit.toString());}
+  if (params?.offset) {queryParams.append("offset", params.offset.toString());}
 
   const url = `/groups/${groupSlug}/entries${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
   return appFetch<GetEntriesResponse>(url, {

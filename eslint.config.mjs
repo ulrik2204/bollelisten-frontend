@@ -1,13 +1,18 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-
 import pluginQuery from "@tanstack/eslint-plugin-query";
+import { defineConfig, globalIgnores } from "eslint/config";
 import mantine from "eslint-config-mantine";
-import prettier from "eslint-config-prettier/flat";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 const eslintConfig = defineConfig([
   ...mantine,
   ...pluginQuery.configs["flat/recommended"],
-  prettier,
+  {
+    plugins: { "simple-import-sort": simpleImportSort },
+    rules: {
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
+    },
+  },
   globalIgnores([
     ".output/**",
     ".nitro/**",

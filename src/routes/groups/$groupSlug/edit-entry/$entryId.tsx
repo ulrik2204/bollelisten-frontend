@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Alert, Card, Loader, Stack, Text } from "@mantine/core";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { useGetEntry } from "@/features/entries-list/api/get-entry";
 import { EditEntryForm } from "@/features/entries-list/components/EditEntryForm/EditEntryForm";

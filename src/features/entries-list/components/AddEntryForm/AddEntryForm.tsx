@@ -1,5 +1,3 @@
-import { useGetPeople } from "@/features/people-list/api/get-people";
-import { CreatePersonModal } from "@/features/people-list/components/CreatePersonModal/CreatePersonModal";
 import {
   Alert,
   Button,
@@ -16,6 +14,10 @@ import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+
+import { useGetPeople } from "@/features/people-list/api/get-people";
+import { CreatePersonModal } from "@/features/people-list/components/CreatePersonModal/CreatePersonModal";
+
 import { usePostCreateEntry } from "../../api/post-create-entry";
 
 type AddEntryFormProps = {

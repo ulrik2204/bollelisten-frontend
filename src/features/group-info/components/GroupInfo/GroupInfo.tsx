@@ -1,6 +1,7 @@
 "use client";
 
 import { Alert, Card, Group, Loader, Stack, Text, Title } from "@mantine/core";
+
 import { useGetGroup } from "../../api/get-current-group";
 
 type GroupInfoProps = {

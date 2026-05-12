@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Container, Stack } from "@mantine/core";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { AddEntryForm } from "@/features/entries-list/components/AddEntryForm/AddEntryForm";
 

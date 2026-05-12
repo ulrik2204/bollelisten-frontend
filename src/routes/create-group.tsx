@@ -1,5 +1,5 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Anchor, Container, Text, Title } from "@mantine/core";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
 import { CreateGroupForm } from "@/features/create-group/components/CreateGroupForm/CreateGroupForm";
 
