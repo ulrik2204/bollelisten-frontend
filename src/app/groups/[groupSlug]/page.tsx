@@ -16,7 +16,7 @@ export default function GroupDashboardPage() {
       <Stack gap="xl">
         <Title order={1}>Dashboard</Title>
 
-        <Grid gutter="md">
+        <Grid>
           <Grid.Col span={{ base: 12, md: 8 }}>
             <Stack gap="md">
               <Anchor href={`/groups/${groupSlug}/add-entry`} fw={500}>
