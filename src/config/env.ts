@@ -1,3 +1,3 @@
 export const env = {
-  backendUrl: process.env.BACKEND_URL || "http://localhost:5048",
+  backendUrl: import.meta.env.VITE_BACKEND_URL || "http://localhost:5048",
 };
