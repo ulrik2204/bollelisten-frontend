@@ -1,20 +1,20 @@
 /// <reference types="vite/client" />
+import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from "@mantine/core";
+import { DatesProvider } from "@mantine/dates";
+import type { QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   HeadContent,
   Outlet,
   Scripts,
   createRootRouteWithContext,
 } from "@tanstack/react-router";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import type { QueryClient } from "@tanstack/react-query";
-import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from "@mantine/core";
-import { DatesProvider } from "@mantine/dates";
 import type { ReactNode } from "react";
 
+import "@/app-globals.css";
+import "@mantine/charts/styles.css";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
-import "@mantine/charts/styles.css";
-import "@/app-globals.css";
 
 import { theme } from "@/config/theme";
 
@@ -31,6 +31,9 @@ export const Route = createRootRouteWithContext<{
         content:
           "Appen for å holde styr på hvem som skylder landskapet boller!",
       },
+    ],
+    links: [
+      { rel: "icon", href: "/favicon.ico" },
     ],
   }),
   component: RootComponent,
