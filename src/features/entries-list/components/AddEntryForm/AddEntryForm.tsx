@@ -1,5 +1,3 @@
-"use client";
-
 import { useGetPeople } from "@/features/people-list/api/get-people";
 import { CreatePersonModal } from "@/features/people-list/components/CreatePersonModal/CreatePersonModal";
 import {
@@ -16,7 +14,7 @@ import {
 import { DateTimePicker } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { usePostCreateEntry } from "../../api/post-create-entry";
 
@@ -25,7 +23,7 @@ type AddEntryFormProps = {
 };
 
 export function AddEntryForm({ groupSlug }: AddEntryFormProps) {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const [modalOpened, { open: openModal, close: closeModal }] =
     useDisclosure(false);
@@ -40,7 +38,7 @@ export function AddEntryForm({ groupSlug }: AddEntryFormProps) {
     onError: (error) => setError(error.message),
     onSuccess: () => {
       setError(null);
-      router.push(`/groups/${groupSlug}`);
+      navigate({ to: "/groups/$groupSlug", params: { groupSlug } });
     },
   });
 

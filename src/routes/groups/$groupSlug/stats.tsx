@@ -1,12 +1,14 @@
-"use client";
+import { createFileRoute } from "@tanstack/react-router";
+import { Anchor, Container, Stack } from "@mantine/core";
 
 import { Stats } from "@/features/stats/components/Stats/Stats";
-import { Anchor, Container, Stack } from "@mantine/core";
-import { useParams } from "next/navigation";
 
-export default function StatsPage() {
-  const params = useParams();
-  const groupSlug = params.groupSlug as string;
+export const Route = createFileRoute("/groups/$groupSlug/stats")({
+  component: StatsPage,
+});
+
+function StatsPage() {
+  const { groupSlug } = Route.useParams();
 
   return (
     <Container size="md" py="xl">

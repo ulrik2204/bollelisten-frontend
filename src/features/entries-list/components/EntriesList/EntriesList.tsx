@@ -1,5 +1,3 @@
-"use client";
-
 import {
   ActionIcon,
   Alert,
@@ -15,7 +13,7 @@ import {
 } from "@mantine/core";
 import { IconEdit } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useGetEntries } from "../../api/get-entries";
 import { usePutUpdateEntry } from "../../api/put-update-entry";
@@ -25,7 +23,7 @@ type EntriesListProps = {
 };
 
 export function EntriesList({ groupSlug }: EntriesListProps) {
-  const router = useRouter();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [error, setError] = useState<string | null>(null);
   const { data, isLoading, error: fetchError } = useGetEntries(groupSlug);
@@ -70,7 +68,10 @@ export function EntriesList({ groupSlug }: EntriesListProps) {
   };
 
   const handleEdit = (entryId: string) => {
-    router.push(`/groups/${groupSlug}/edit-entry/${entryId}`);
+    navigate({
+      to: "/groups/$groupSlug/edit-entry/$entryId",
+      params: { groupSlug, entryId },
+    });
   };
 
   return (

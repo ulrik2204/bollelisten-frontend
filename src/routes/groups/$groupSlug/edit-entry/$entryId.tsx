@@ -1,14 +1,15 @@
-"use client";
+import { createFileRoute } from "@tanstack/react-router";
+import { Alert, Card, Loader, Stack, Text } from "@mantine/core";
 
 import { useGetEntry } from "@/features/entries-list/api/get-entry";
 import { EditEntryForm } from "@/features/entries-list/components/EditEntryForm/EditEntryForm";
-import { Alert, Card, Loader, Stack, Text } from "@mantine/core";
-import { useParams } from "next/navigation";
 
-export default function EditEntryPage() {
-  const params = useParams();
-  const groupSlug = params.groupSlug as string;
-  const entryId = params.entryId as string;
+export const Route = createFileRoute("/groups/$groupSlug/edit-entry/$entryId")({
+  component: EditEntryPage,
+});
+
+function EditEntryPage() {
+  const { groupSlug, entryId } = Route.useParams();
 
   const { data, isLoading, error } = useGetEntry(groupSlug, entryId);
 

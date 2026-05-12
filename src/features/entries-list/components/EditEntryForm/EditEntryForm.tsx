@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Alert,
   Button,
@@ -12,7 +10,7 @@ import {
 } from "@mantine/core";
 import { DateTimePicker } from "@mantine/dates";
 import { useForm } from "@tanstack/react-form";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Entry } from "../../api/get-entries";
 import { usePutUpdateEntry } from "../../api/put-update-entry";
@@ -23,14 +21,14 @@ type EditEntryFormProps = {
 };
 
 export function EditEntryForm({ groupSlug, entry }: EditEntryFormProps) {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
 
   const { mutate: updateEntry, isPending } = usePutUpdateEntry(groupSlug, {
     onError: (error) => setError(error.message),
     onSuccess: () => {
       setError(null);
-      router.push(`/groups/${groupSlug}`);
+      navigate({ to: "/groups/$groupSlug", params: { groupSlug } });
     },
   });
 
@@ -146,7 +144,9 @@ export function EditEntryForm({ groupSlug, entry }: EditEntryFormProps) {
             <Button
               variant="subtle"
               fullWidth
-              onClick={() => router.push(`/groups/${groupSlug}`)}
+              onClick={() =>
+                navigate({ to: "/groups/$groupSlug", params: { groupSlug } })
+              }
             >
               Cancel
             </Button>

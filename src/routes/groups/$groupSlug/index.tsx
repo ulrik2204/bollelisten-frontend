@@ -1,15 +1,17 @@
-"use client";
+import { createFileRoute } from "@tanstack/react-router";
+import { Anchor, Container, Grid, Stack, Title } from "@mantine/core";
 
 import { EntriesList } from "@/features/entries-list/components/EntriesList/EntriesList";
 import { GroupInfo } from "@/features/group-info/components/GroupInfo/GroupInfo";
 import { PeopleList } from "@/features/people-list/components/PeopleList/PeopleList";
 import { getText } from "@/utils/text-service";
-import { Anchor, Container, Grid, Stack, Title } from "@mantine/core";
-import { useParams } from "next/navigation";
 
-export default function GroupDashboardPage() {
-  const params = useParams();
-  const groupSlug = params.groupSlug as string;
+export const Route = createFileRoute("/groups/$groupSlug/")({
+  component: GroupDashboardPage,
+});
+
+function GroupDashboardPage() {
+  const { groupSlug } = Route.useParams();
 
   return (
     <Container size="xl" py="xl">

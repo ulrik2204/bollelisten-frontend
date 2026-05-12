@@ -1,11 +1,14 @@
-"use client";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Anchor, Container, Text, Title } from "@mantine/core";
 
 import { CreateGroupForm } from "@/features/create-group/components/CreateGroupForm/CreateGroupForm";
-import { Anchor, Container, Text, Title } from "@mantine/core";
-import { useRouter } from "next/navigation";
 
-export default function CreateGroup() {
-  const router = useRouter();
+export const Route = createFileRoute("/create-group")({
+  component: CreateGroupPage,
+});
+
+function CreateGroupPage() {
+  const navigate = useNavigate();
 
   return (
     <main>
@@ -19,7 +22,12 @@ export default function CreateGroup() {
           </Text>
 
           <CreateGroupForm
-            onSuccess={(groupSlug) => router.push(`/groups/${groupSlug}`)}
+            onSuccess={(groupSlug) =>
+              navigate({
+                to: "/groups/$groupSlug",
+                params: { groupSlug },
+              })
+            }
           />
 
           <Text ta="center" mt="md">

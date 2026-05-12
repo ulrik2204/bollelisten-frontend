@@ -1,5 +1,4 @@
-"use client";
-
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   Anchor,
   Button,
@@ -10,11 +9,14 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function Home() {
-  const router = useRouter();
+export const Route = createFileRoute("/")({
+  component: HomePage,
+});
+
+function HomePage() {
+  const navigate = useNavigate();
   const [groupSlug, setGroupSlug] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -25,7 +27,7 @@ export default function Home() {
       return;
     }
     setError(null);
-    router.push(`/groups/${slug}`);
+    navigate({ to: "/groups/$groupSlug", params: { groupSlug: slug } });
   };
 
   return (
