@@ -53,7 +53,6 @@ export function AddEntryForm({ groupSlug }: AddEntryFormProps) {
     },
     onSubmit: async ({ value }) => {
       setError(null);
-      console.log("Submitting entry with values:", value);
       createEntry({
         personId: value.personId,
         incidentTime: value.incidentTime,
@@ -158,7 +157,7 @@ export function AddEntryForm({ groupSlug }: AddEntryFormProps) {
                   placeholder="Select date"
                   required
                   value={field.state.value ? new Date(field.state.value) : null}
-                  onChange={(value) => value && field.handleChange(value)}
+                  onChange={(value) => value && field.handleChange(new Date(value).toISOString())}
                   onBlur={field.handleBlur}
                   error={field.state.meta.errors?.[0]}
                 />
