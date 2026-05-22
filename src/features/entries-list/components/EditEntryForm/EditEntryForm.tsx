@@ -99,7 +99,9 @@ export function EditEntryForm({ groupSlug, entry }: EditEntryFormProps) {
                 placeholder="Select date"
                 required
                 value={field.state.value ? new Date(field.state.value) : null}
-                onChange={(date) => field.handleChange(date || "")}
+                onChange={(date) => {
+                  if (date) {field.handleChange(new Date(date).toISOString());}
+                }}
                 onBlur={field.handleBlur}
                 error={field.state.meta.errors?.[0]}
               />
@@ -127,7 +129,7 @@ export function EditEntryForm({ groupSlug, entry }: EditEntryFormProps) {
                       value={
                         field.state.value ? new Date(field.state.value) : null
                       }
-                      onChange={(date) => field.handleChange(date || null)}
+                      onChange={(date) => field.handleChange(date ? new Date(date).toISOString() : null)}
                       onBlur={field.handleBlur}
                     />
                   )}
